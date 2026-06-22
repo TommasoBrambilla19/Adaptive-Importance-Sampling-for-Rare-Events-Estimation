@@ -6,11 +6,11 @@
 function [Pf_hat, T_final] = iCEIS_GM_core(Sfun, dim, k_clusters, ns, n_final, target_cv, max_iter)
     
     % --- INITIALIZATION ---
-    % As per Section 3 (Improved cross entropy method), the algorithm is initialized.
-    % In this specific implementation, instead of the vMFNM model, a Gaussian 
+    % Improved cross entropy method
+    % In this specific implementation, a Gaussian 
     % Mixture Model (GMM) is used as the parametric family.
     
-    % Initialize smooth approximation parameter sigma_0 = infinity (Eq. 17 context)
+    % Initialize smooth approximation parameter sigma_0 = infinity
     % Here initialized as a sufficiently large number (10.0) for standard normal space.
     sigma_prev = 10.0; 
     
@@ -50,7 +50,7 @@ function [Pf_hat, T_final] = iCEIS_GM_core(Sfun, dim, k_clusters, ns, n_final, t
         % CONVERGENCE CHECK (Step 3)
         % ============================================================
         % Evaluate the sample CV of the weights with respect to the optimal IS density.
-        % Using the smooth approximation: h_t(u) proportional to \Phi(-G(u)/\sigma) (Eq. 15)
+        % Using the smooth approximation: h_t(u) proportional to \Phi(-G(u)/\sigma) 
         
         % phi_prev corresponds to \Phi(-G(u_k)/\sigma_{t-1})
         phi_prev = normcdf(-g_val / sigma_prev);
@@ -66,7 +66,7 @@ function [Pf_hat, T_final] = iCEIS_GM_core(Sfun, dim, k_clusters, ns, n_final, t
             cv_stop = inf;
         end
         
-        % If the CV is smaller than \delta_{target} AND we have failure samples, stop.
+        % If the CV is smaller than \delta_{target} and we have failure samples, stop.
         if cv_stop <= target_cv && any(g_val <= 0)
             T_final = t;
             break; % Go to Step 6
@@ -75,8 +75,8 @@ function [Pf_hat, T_final] = iCEIS_GM_core(Sfun, dim, k_clusters, ns, n_final, t
         % ============================================================
         % SMOOTHING PARAMETER OPTIMIZATION (Step 4)
         % ============================================================
-        % Solve Eq. (17) to determine \sigma_t such that the CV of the new weights 
-        % equals the target CV (\delta_{target}).
+        % Determine \sigma_t such that the CV of the new weights 
+        % equals the target CV (\delta_{target}) (do this by solving equation (17))
         
         % Evaluate the nominal standard normal density \varphi_n(u) for all samples
         phi_n = mvnpdf(u, zeros(1, dim), eye(dim));
