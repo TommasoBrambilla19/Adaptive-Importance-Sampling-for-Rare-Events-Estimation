@@ -1,5 +1,6 @@
 # Adaptive Importance Sampling for Rare Events Estimation
 
+CURRENTLY UPDATING THIS REPO
 This repository contains the computational implementations developed for my Master's thesis. It focuses on advanced statistical modeling and probability theory, specifically applying and comparing various Adaptive Importance Sampling methods for rare event estimation.
 
 ## Overview
