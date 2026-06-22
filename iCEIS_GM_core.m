@@ -1,5 +1,5 @@
 %% ========================================================================
-% iCE-IS GM CORE ALGORITHM (CLEAN & ANNOTATED)
+% iCE-IS GM CORE ALGORITHM 
 % Based on: "Improved cross entropy-based importance sampling with a 
 % flexible mixture model" (Papaioannou et al., 2019)
 % ========================================================================
